@@ -1,0 +1,15 @@
+.posts {
+    margin-top: 3rem;
+}
+.posts-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.35rem;
+}
+
+@media all and (min-width: 600px) {
+    .posts-container {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.7rem;
+    }
+}

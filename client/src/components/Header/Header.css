@@ -1,0 +1,73 @@
+.header-container {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+.header__image-wrapper {
+    width: 150px;
+    height: 150px;
+    margin-right: 6rem;
+}
+.header__image {
+    border-radius: 50%;
+}
+.header__profile {
+    flex: 1;
+    margin: 0.6rem 0;
+    line-height: 1.6rem;
+}
+.header__top {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.header__username {
+    font-weight: 100;
+    font-size: 25px;
+}
+.header__btn-container {
+    display: flex;
+    align-items: center;
+}
+.header__settings-btn {
+    color: rgb(38, 38, 38);
+    font-size: 1.8rem !important;
+    margin-left: 0.5rem;
+}
+.header__follow {
+    display: flex;
+    align-items: center;
+    margin-top: 1.5rem;
+    margin-bottom: 0.8rem;
+}
+.header__follow-item {
+    margin-right: 1rem;
+}
+.header__data {
+    font-weight: 600;
+    font-size: 16px;
+}
+.header__name {
+    font-size: 16px;
+    font-weight: 500;
+}
+.header__url {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: rgb(0, 55, 107);
+    font-size: 16px;
+    font-weight: 600;
+}
+
+@media all and (min-width: 600px) {
+    .header-container {
+        flex-direction: row;
+    }
+    .header__btn-container {
+        margin-left: 1.1rem;
+    }
+    .header__image-wrapper {
+        margin-left: 4rem;
+    }
+}
