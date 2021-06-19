@@ -1,0 +1,27 @@
+{
+    "name": "server",
+    "version": "1.0.0",
+    "description": "Instagram backend",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "start": "nodemon index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/seyedmahdii/instagram_mern.git"
+    },
+    "author": "Seyed Mahdi Jalali",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/seyedmahdii/instagram_mern/issues"
+    },
+    "homepage": "https://github.com/seyedmahdii/instagram_mern#readme",
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "mongoose": "^5.12.14",
+        "nodemon": "^2.0.7"
+    }
+}
