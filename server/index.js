@@ -17,7 +17,7 @@ app.use("/posts", postRoutes);
 
 // DB config
 const CONNECTION_URL =
-    "mongodb+srv://seyedmahdii:test1234@cluster0.l1i9f.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+    "mongodb+srv://seyedmahdii:test1234@cluster0.l1i9f.mongodb.net/instagram?retryWrites=true&w=majority";
 mongoose.connect(CONNECTION_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
