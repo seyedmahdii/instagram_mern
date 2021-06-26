@@ -1,22 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Form.css";
 
 import FileBase from "react-file-base64";
-import { useDispatch } from "react-redux";
-import { createPost } from "../../actions/posts.js";
+import { useDispatch, useSelector } from "react-redux";
+import { createPost, updatePost } from "../../actions/posts.js";
 
-function Form() {
+function Form({ currentId }) {
     const [postData, setPostData] = useState({
         caption: "",
         creator: "",
         selectedFile: "",
     });
     const dispatch = useDispatch();
+    const toBeUpdatedPostData = useSelector((state) =>
+        currentId ? state.posts.find((post) => post._id === currentId) : null
+    );
+
+    useEffect(() => {
+        if (toBeUpdatedPostData) {
+            setPostData(toBeUpdatedPostData);
+        }
+    }, [toBeUpdatedPostData]);
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        dispatch(createPost(postData));
+        if (currentId) {
+            dispatch(updatePost(postData, currentId));
+        } else {
+            dispatch(createPost(postData));
+        }
     };
 
     return (
