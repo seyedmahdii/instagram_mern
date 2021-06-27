@@ -2,10 +2,6 @@ import React from "react";
 import "./Posts.css";
 import "./../../App.css";
 import Post from "./Post/Post";
-// import Image1 from "./../../images/Post1.jpg";
-// import Image2 from "./../../images/Post2.jpg";
-// import Image3 from "./../../images/Post3.jpg";
-// import Image4 from "./../../images/Post4.jpg";
 
 import { useSelector } from "react-redux";
 
