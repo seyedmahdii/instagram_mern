@@ -3,10 +3,10 @@ import "../../../App.css";
 import "./Post.css";
 
 import { useDispatch } from "react-redux";
-import { deletePost } from "../../../actions/posts";
+import { deletePost, likePost } from "../../../actions/posts";
 
 function Post({ post, setCurrentId }) {
-    const { selectedFile, caption, creator, _id } = post;
+    const { selectedFile, caption, creator, _id, likeCount } = post;
     const dispatch = useDispatch();
 
     return (
@@ -17,9 +17,10 @@ function Post({ post, setCurrentId }) {
                 <button onClick={() => dispatch(deletePost(_id))}>
                     delete
                 </button>
-                <button onClick={() => {}}>like</button>
+                <button onClick={() => dispatch(likePost(_id))}>like</button>
                 <h3>{caption}</h3>
                 <h3>creator : {creator}</h3>
+                <h4>likes: {likeCount}</h4>
             </div>
         </div>
     );
