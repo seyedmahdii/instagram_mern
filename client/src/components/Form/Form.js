@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Form.css";
 
 import FileBase from "react-file-base64";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createPost, updatePost } from "../../actions/posts.js";
 
@@ -12,6 +13,7 @@ function Form({ currentId }) {
         selectedFile: "",
     });
     const dispatch = useDispatch();
+    const history = useHistory();
     const toBeUpdatedPostData = useSelector((state) =>
         currentId ? state.posts.find((post) => post._id === currentId) : null
     );
@@ -30,6 +32,8 @@ function Form({ currentId }) {
         } else {
             dispatch(createPost(postData));
         }
+
+        history.push("/");
     };
 
     return (
