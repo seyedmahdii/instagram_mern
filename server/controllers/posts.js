@@ -12,7 +12,11 @@ export const getPosts = async (req, res) => {
 
 export const createPost = async (req, res) => {
     const post = req.body;
-    const newPost = new Post(post);
+    const newPost = new Post({
+        ...post,
+        creatorId: req.userId,
+        createdAt: new Date().toISOString(),
+    });
 
     try {
         await newPost.save();
@@ -52,16 +56,28 @@ export const deletePost = async (req, res) => {
 export const likePost = async (req, res) => {
     const { id: _id } = req.params;
 
-    if (!mongoose.Types.ObjectId.isValid(_id)) {
-        return res.status(4040).json("No post with such a id");
+    // Not authenticaed user
+    if (!req.userId) {
+        return res.status(401).json({ message: `Unauthorized action!` });
     }
 
-    const post = Post.findById(_id);
+    if (!mongoose.Types.ObjectId.isValid(_id)) {
+        return res.status(404).json(`No post with id: ${_id}`);
+    }
 
-    const updatedPost = await Post.findByIdAndUpdate(
-        _id,
-        { likeCount: post.likeCount + 1 },
-        { new: true }
-    );
+    let post = await Post.findById(_id);
+
+    // id of logged user among users who liked the post
+    const index = post.likes.findIndex((id) => id === String(req.userId));
+
+    if (index === -1) {
+        // user likes the post
+        post.likes.push(req.userId);
+    } else {
+        // user dislikes the post
+        post.likes = post.likes.filter((id) => id !== String(req.userId));
+    }
+
+    const updatedPost = await Post.findByIdAndUpdate(_id, post, { new: true });
     res.json(updatedPost);
 };

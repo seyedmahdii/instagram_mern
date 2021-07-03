@@ -1,17 +1,26 @@
 import React, { useState } from "react";
 
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+
+import { register } from "../../../actions/auth";
+
 function Register() {
     const [formData, setFormData] = useState({
         name: "",
+        email: "",
         username: "",
         password: "",
         confirmPassword: "",
     });
+    const dispatch = useDispatch();
+    const history = useHistory();
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        console.log(formData);
+        dispatch(register(formData));
+        history.push("/");
     };
 
     const handleChange = (event) => {
@@ -28,32 +37,32 @@ function Register() {
                 <input
                     type="text"
                     name="name"
-                    placeHolder="Full Name"
+                    placeholder="Full Name"
                     autoFocus
                     onChange={handleChange}
                 />
                 <input
                     type="email"
                     name="email"
-                    placeHolder="Email"
+                    placeholder="Email"
                     onChange={handleChange}
                 />
                 <input
                     type="text"
                     name="username"
-                    placeHolder="Username"
+                    placeholder="Username"
                     onChange={handleChange}
                 />
                 <input
                     type="password"
                     name="password"
-                    placeHolder="Password"
+                    placeholder="Password"
                     onChange={handleChange}
                 />
                 <input
                     type="password"
                     name="confirmPassword"
-                    placeHolder="Confirm Password"
+                    placeholder="Confirm Password"
                     onChange={handleChange}
                 />
                 <button type="submit" className="">

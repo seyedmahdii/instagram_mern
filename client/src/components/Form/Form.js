@@ -9,7 +9,6 @@ import { createPost, updatePost } from "../../actions/posts.js";
 function Form({ currentId }) {
     const [postData, setPostData] = useState({
         caption: "",
-        creator: "",
         selectedFile: "",
     });
     const dispatch = useDispatch();
@@ -59,25 +58,6 @@ function Form({ currentId }) {
                     />
                     <label htmlFor="caption" className="form__label">
                         caption
-                    </label>
-                    <div className="underlined"></div>
-                </div>
-
-                <div className="form__control">
-                    <input
-                        type="text"
-                        className="form__input"
-                        id="creator"
-                        value={postData.creator}
-                        onChange={(event) =>
-                            setPostData({
-                                ...postData,
-                                creator: event.target.value,
-                            })
-                        }
-                    />
-                    <label htmlFor="creator" className="form__label">
-                        creator
                     </label>
                     <div className="underlined"></div>
                 </div>

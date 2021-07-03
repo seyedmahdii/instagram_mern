@@ -58,11 +58,11 @@ export const login = async (req, res) => {
             return res.status(400).json(`Incorrect password!`);
         }
 
-        const token = jwt.sign({ email, id: result._id }, "testPass", {
+        const token = jwt.sign({ email, id: existingUser._id }, "testPass", {
             expiresIn: "1h",
         });
 
-        res.status(200).json({ existingUser, token });
+        res.status(200).json({ result: existingUser, token });
     } catch (error) {
         res.status(500).json(error);
     }
