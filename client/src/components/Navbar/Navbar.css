@@ -7,7 +7,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem 0;
+    padding: 0.6rem 0;
 }
 
 .nav__input-wrapper {
@@ -31,6 +31,20 @@
     vertical-align: baseline;
     color: #8e8e8e;
     font-size: 18px !important;
+}
+.nav__buttons {
+    display: flex;
+    align-items: center;
+}
+.nav__buttons > * {
+    margin-left: 0.8rem;
+}
+.nav__icon {
+    color: rgb(20, 20, 20);
+    font-size: 1.65rem !important;
+    cursor: pointer;
+}
+.logout {
 }
 .nav__avatar {
     background-color: lightgreen;

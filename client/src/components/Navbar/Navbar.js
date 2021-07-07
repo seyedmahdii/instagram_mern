@@ -8,6 +8,16 @@ import { logOut } from "../../actions/auth";
 import { useHistory, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
+import ExploreIcon from "@material-ui/icons/Explore";
+import ExploreOutlinedIcon from "@material-ui/icons/ExploreOutlined";
+import HomeIcon from "@material-ui/icons/Home";
+import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import FavoriteBorderOutlinedIcon from "@material-ui/icons/FavoriteBorderOutlined";
+import InboxIcon from "@material-ui/icons/Inbox";
+import InboxOutlinedIcon from "@material-ui/icons/InboxOutlined";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+
 import decode from "jwt-decode";
 
 function Navbar() {
@@ -62,19 +72,22 @@ function Navbar() {
                     {user ? (
                         <div className="nav__buttons">
                             <span className="nav__avatar">
-                                {user?.result?.username.charAt(0)}
+                                {user?.result?.username?.charAt(0)}
                             </span>
-                            <button onClick={() => logout()}>log out</button>
+                            <HomeIcon className="nav__icon logout" />
+                            <FavoriteBorderOutlinedIcon className="nav__icon logout" />
+                            <ExploreOutlinedIcon className="nav__icon logout" />
+                            <ExitToAppIcon
+                                onClick={() => logout()}
+                                className="nav__icon logout"
+                            />
                         </div>
                     ) : (
                         <div className="nav__buttons">
                             <a href="/login" className="btn btn-primary">
                                 Log in
                             </a>
-                            <a
-                                href="/register"
-                                className="btn btn-color-primary"
-                            >
+                            <a href="/register" className="btn color-primary">
                                 Sign up
                             </a>
                         </div>

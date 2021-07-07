@@ -1,0 +1,39 @@
+.auth-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.box {
+    width: 100%;
+    max-width: 420px;
+    background-color: white;
+    border: 1px solid #dbdbdb;
+    border-radius: 2px;
+    padding: 1.2rem 2rem;
+    margin: 0.3rem 0;
+    text-align: center;
+}
+.auth__header {
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+}
+.auth__logo {
+    width: 140px;
+}
+
+.auth__footer {
+    margin: 1rem;
+    color: #9e9e9e;
+    font-size: 0.74rem;
+}
+.footer-link {
+    color: #00376b;
+    font-size: 0.77rem;
+}
+.subtext {
+    font-size: 0.85rem;
+}
+.sublink {
+    font-weight: 600;
+}

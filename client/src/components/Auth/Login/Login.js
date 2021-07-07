@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import "../Auth.css";
+import logo from "../../../images/logo.png";
 
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -28,24 +30,64 @@ function Register() {
 
     return (
         <div className="login">
-            <h1>Login</h1>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    onChange={handleChange}
-                />
-                <input
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                    onChange={handleChange}
-                />
-                <button type="submit" className="">
-                    Log in
-                </button>
-            </form>
+            <div className="container auth-container">
+                <div className="box">
+                    <header className="auth__header">
+                        <img src={logo} className="auth__logo" alt="Logo" />
+                    </header>
+                    <form className="form" onSubmit={handleSubmit}>
+                        <div className="form-control">
+                            <input
+                                type="email"
+                                name="email"
+                                id="email"
+                                className="form__input"
+                                onChange={handleChange}
+                                required
+                            />
+                            <label htmlFor="email" className="form__label">
+                                Email
+                            </label>
+                        </div>
+                        <div className="form-control">
+                            <input
+                                type="password"
+                                name="password"
+                                id="password"
+                                className="form__input"
+                                onChange={handleChange}
+                                required
+                            />
+                            <label htmlFor="password" className="form__label">
+                                Password
+                            </label>
+
+                            <button className="toggle-password">Show</button>
+                        </div>
+                        <button
+                            type="submit"
+                            className="btn btn-primary btn--full-width"
+                        >
+                            Log in
+                        </button>
+                    </form>
+
+                    <footer className="auth__footer">
+                        <a href="#" className="footer-link">
+                            Forgot password?
+                        </a>
+                    </footer>
+                </div>
+
+                <div className="box">
+                    <span className="subtext">
+                        Don't have an account?&nbsp;
+                        <a href="/register" className="color-primary sublink">
+                            Sign up
+                        </a>
+                    </span>
+                </div>
+            </div>
         </div>
     );
 }

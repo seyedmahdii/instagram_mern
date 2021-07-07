@@ -5,10 +5,11 @@ export const logOut = () => async (dispatch) => {
     dispatch({ type: LOGOUT });
 };
 
-export const register = (formData) => async (dispatch) => {
+export const register = (formData, history) => async (dispatch) => {
     try {
         const { data } = await api.register(formData);
         dispatch({ type: AUTH, data });
+        history.push("/");
     } catch (error) {
         console.log(error);
     }
