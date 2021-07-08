@@ -8,11 +8,15 @@ import thunk from "redux-thunk";
 
 import reducers from "./reducers/index.js";
 
+import { AppProvider } from "./Context.js";
+
 const store = createStore(reducers, compose(applyMiddleware(thunk)));
 
 ReactDOM.render(
     <Provider store={store}>
-        <App />
+        <AppProvider>
+            <App />
+        </AppProvider>
     </Provider>,
     document.getElementById("root")
 );
