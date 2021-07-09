@@ -2,8 +2,13 @@ import mongoose from "mongoose";
 import Post from "../models/post.js";
 
 export const getPosts = async (req, res) => {
+    const { username } = req.params;
+
     try {
-        const posts = await Post.find();
+        const posts = await Post.find({
+            username: username,
+        });
+
         res.status(200).json(posts);
     } catch (error) {
         res.status(404).json(error);

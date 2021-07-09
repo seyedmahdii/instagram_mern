@@ -1,9 +1,9 @@
 import * as api from "../api/index.js";
 import { READ, CREATE, UPDATE, DELETE } from "../constants/actionTypes.js";
 
-export const getPosts = () => async (dispatch) => {
+export const getPosts = (username) => async (dispatch) => {
     try {
-        const { data } = await api.getPosts();
+        const { data } = await api.getPosts(username);
 
         dispatch({ type: READ, payload: data });
     } catch (error) {

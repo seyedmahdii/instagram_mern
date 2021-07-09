@@ -1,25 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./App.css";
+
+import Profile from "./components/Profile/Profile";
 import Navbar from "./components/Navbar/Navbar";
-import Header from "./components/Header/Header";
-import Posts from "./components/Posts/Posts";
 import Form from "./components/Form/Form";
 import Register from "./components/Auth/Register/Register";
 import Login from "./components/Auth/Login/Login";
 import NotFound404 from "./components/Error/404/NotFound404";
 
-import { useDispatch } from "react-redux";
-import { getPosts } from "./actions/posts.js";
-
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
 function App() {
-    const dispatch = useDispatch();
-    const [currentId, setCurrentId] = useState(null);
-
-    useEffect(() => {
-        dispatch(getPosts());
-    }, [currentId, dispatch]);
+    const user = JSON.parse(localStorage.getItem("profile"));
 
     return (
         <div className="instagram">
@@ -27,17 +19,24 @@ function App() {
                 <Navbar />
                 <Switch>
                     <Route path="/post/create" exact>
-                        <Form currentId={currentId} />
+                        {user ? <Form /> : <Redirect to="/login" />}
                     </Route>
                     <Route path="/register" exact>
-                        <Register />
+                        {user ? (
+                            <Redirect to={`/${user?.result?.username}`} />
+                        ) : (
+                            <Register />
+                        )}
                     </Route>
                     <Route path="/login" exact>
-                        <Login />
+                        {user ? (
+                            <Redirect to={`/${user?.result?.username}`} />
+                        ) : (
+                            <Login />
+                        )}
                     </Route>
-                    <Route path="/" exact>
-                        <Header />
-                        <Posts setCurrentId={setCurrentId} />
+                    <Route path="/:username" exact>
+                        <Profile />
                     </Route>
                     <NotFound404 />
                 </Switch>

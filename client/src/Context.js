@@ -1,12 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
-    let x = "hello",
-        m;
+    const [currentId, setCurrentId] = useState(null);
+
     return (
-        <AppContext.Provider value={{ x, m }}>{children}</AppContext.Provider>
+        <AppContext.Provider value={{ currentId, setCurrentId }}>
+            {children}
+        </AppContext.Provider>
     );
 };
 

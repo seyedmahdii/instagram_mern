@@ -13,7 +13,7 @@ API.interceptors.request.use((req) => {
     return req;
 });
 
-export const getPosts = () => API.get(`/posts`);
+export const getPosts = (username) => API.get(`/posts/${username}`);
 
 export const createPost = (newPost) => API.post(`/posts`, newPost);
 

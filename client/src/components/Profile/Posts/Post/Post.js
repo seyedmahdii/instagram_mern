@@ -1,15 +1,26 @@
 import React, { useState } from "react";
-import "../../../App.css";
 import "./Post.css";
 
 import { useDispatch } from "react-redux";
-import { deletePost, likePost } from "../../../actions/posts";
+import { deletePost, likePost } from "../../../../actions/posts";
+import { useGlobalContext } from "../../../../Context";
 
-function Post({ post, setCurrentId }) {
+import moment from "moment";
+
+function Post({ post }) {
     const [user, setUser] = useState(
         JSON.parse(localStorage.getItem("profile"))
     );
-    const { selectedFile, caption, creatorId, username, _id, likes } = post;
+    const {
+        selectedFile,
+        caption,
+        creatorId,
+        username,
+        _id,
+        likes,
+        createdAt,
+    } = post;
+    const { setCurrentId } = useGlobalContext();
     const dispatch = useDispatch();
 
     return (
@@ -29,6 +40,7 @@ function Post({ post, setCurrentId }) {
                 <h3>{caption}</h3>
                 <h3>username : {username}</h3>
                 <h4>likes: {likes.length}</h4>
+                <h4>created at: {moment(createdAt).fromNow()}</h4>
             </div>
         </div>
     );

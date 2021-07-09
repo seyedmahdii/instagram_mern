@@ -1,11 +1,10 @@
 import React from "react";
 import "./Posts.css";
-import "./../../App.css";
 import Post from "./Post/Post";
 
 import { useSelector } from "react-redux";
 
-function Posts({ setCurrentId }) {
+function Posts() {
     const posts = useSelector((state) => state.posts);
     console.log(posts);
 
@@ -16,13 +15,7 @@ function Posts({ setCurrentId }) {
                     <h1>Loading...</h1>
                 ) : (
                     posts.map((post) => {
-                        return (
-                            <Post
-                                post={post}
-                                key={post._id}
-                                setCurrentId={setCurrentId}
-                            />
-                        );
+                        return <Post post={post} key={post._id} />;
                     })
                 )}
             </div>

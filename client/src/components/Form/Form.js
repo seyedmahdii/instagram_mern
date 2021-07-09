@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../../App.css";
+import { useGlobalContext } from "../../Context";
 import logo from "../../images/logo.png";
 
 import FileBase from "react-file-base64";
@@ -7,16 +8,18 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createPost, updatePost } from "../../actions/posts.js";
 
-function Form({ currentId }) {
+function Form() {
     const [postData, setPostData] = useState({
         caption: "",
         selectedFile: "",
     });
+    const { currentId } = useGlobalContext();
     const dispatch = useDispatch();
     const history = useHistory();
     const toBeUpdatedPostData = useSelector((state) =>
         currentId ? state.posts.find((post) => post._id === currentId) : null
     );
+    const user = JSON.parse(localStorage.getItem("profile"));
 
     useEffect(() => {
         if (toBeUpdatedPostData) {
@@ -28,9 +31,16 @@ function Form({ currentId }) {
         event.preventDefault();
 
         if (currentId) {
-            dispatch(updatePost(postData, currentId));
+            dispatch(
+                updatePost(
+                    { ...postData, username: user?.result?.username },
+                    currentId
+                )
+            );
         } else {
-            dispatch(createPost(postData));
+            dispatch(
+                createPost({ ...postData, username: user?.result?.username })
+            );
         }
 
         history.push("/");

@@ -1,7 +1,6 @@
 import React from "react";
 import "./Header.css";
-import "../../App.css";
-import Profile from "./../../images/profile.jpg";
+import Profile from "../../../images/profile.jpg";
 import SettingsIcon from "@material-ui/icons/Settings";
 
 function Header() {
