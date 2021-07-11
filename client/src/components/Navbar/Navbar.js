@@ -8,14 +8,14 @@ import { logOut } from "../../actions/auth";
 import { useHistory, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import ExploreIcon from "@material-ui/icons/Explore";
+// import ExploreIcon from "@material-ui/icons/Explore";
 import ExploreOutlinedIcon from "@material-ui/icons/ExploreOutlined";
 import HomeIcon from "@material-ui/icons/Home";
-import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
-import FavoriteIcon from "@material-ui/icons/Favorite";
+// import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
+// import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderOutlinedIcon from "@material-ui/icons/FavoriteBorderOutlined";
-import InboxIcon from "@material-ui/icons/Inbox";
-import InboxOutlinedIcon from "@material-ui/icons/InboxOutlined";
+// import InboxIcon from "@material-ui/icons/Inbox";
+// import InboxOutlinedIcon from "@material-ui/icons/InboxOutlined";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 import decode from "jwt-decode";

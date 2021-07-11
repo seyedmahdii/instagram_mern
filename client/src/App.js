@@ -7,6 +7,7 @@ import Form from "./components/Form/Form";
 import Register from "./components/Auth/Register/Register";
 import Login from "./components/Auth/Login/Login";
 import NotFound404 from "./components/Error/404/NotFound404";
+import PostDetails from "./components/PostDetails/PostDetails";
 
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
@@ -34,6 +35,9 @@ function App() {
                         ) : (
                             <Login />
                         )}
+                    </Route>
+                    <Route path="/posts/:id" exact>
+                        <PostDetails />
                     </Route>
                     <Route path="/:username" exact>
                         <Profile />

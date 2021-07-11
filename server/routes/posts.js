@@ -5,16 +5,18 @@ import {
     updatePost,
     deletePost,
     likePost,
+    getPost,
 } from "../controllers/posts.js";
 
 import auth from "../middleware/auth.js";
 
 const router = Express.Router();
 
-router.get("/:username", getPosts);
-router.post("/", auth, createPost);
-router.patch("/:id", auth, updatePost);
-router.delete("/:id", auth, deletePost);
-router.patch("/:id/likePost", auth, likePost);
+router.get("/posts/:username", getPosts);
+router.get("/post/:id", getPost);
+router.post("/post", auth, createPost);
+router.patch("/post/:id", auth, updatePost);
+router.delete("/post/:id", auth, deletePost);
+router.patch("/post/:id/likePost", auth, likePost);
 
 export default router;

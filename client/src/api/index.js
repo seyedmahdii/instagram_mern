@@ -14,15 +14,15 @@ API.interceptors.request.use((req) => {
 });
 
 export const getPosts = (username) => API.get(`/posts/${username}`);
-
-export const createPost = (newPost) => API.post(`/posts`, newPost);
+export const createPost = (newPost) => API.post(`/post`, newPost);
 
 export const updatePost = (updatedPost, id) =>
-    API.patch(`/posts/${id}`, updatedPost);
+    API.patch(`/post/${id}`, updatedPost);
 
-export const deletePost = (id) => API.delete(`/posts/${id}`);
+export const deletePost = (id) => API.delete(`/post/${id}`);
+export const likePost = (id) => API.patch(`/post/${id}/likePost`);
+export const getPost = (id) => API.get(`/post/${id}`);
 
-export const likePost = (id) => API.patch(`/posts/${id}/likePost`);
-
+// Auth
 export const register = (formData) => API.post(`/user/register`, formData);
 export const login = (formData) => API.post(`/user/login`, formData);

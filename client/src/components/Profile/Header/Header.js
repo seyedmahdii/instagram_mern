@@ -3,7 +3,13 @@ import "./Header.css";
 import Profile from "../../../images/profile.jpg";
 import SettingsIcon from "@material-ui/icons/Settings";
 
+import { useParams } from "react-router-dom";
+import { useGlobalContext } from "../../../Context";
+
 function Header() {
+    const { username } = useParams();
+    const { postsCount } = useGlobalContext();
+
     return (
         <div className="header">
             <div className="container header-container">
@@ -17,7 +23,7 @@ function Header() {
 
                 <div className="header__profile">
                     <div className="header__top">
-                        <h2 className="header__username">seyedmahdii_</h2>
+                        <h2 className="header__username">{username}</h2>
                         <div className="header__btn-container">
                             <a className="btn btn-bordered btn-bordered-default">
                                 Edit Profile
@@ -29,7 +35,7 @@ function Header() {
                     <div className="header__follow">
                         <div className="header__follow-item">
                             <span className="header__data header__posts">
-                                11
+                                {postsCount}
                             </span>{" "}
                             posts
                         </div>

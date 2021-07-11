@@ -86,3 +86,19 @@ export const likePost = async (req, res) => {
     const updatedPost = await Post.findByIdAndUpdate(_id, post, { new: true });
     res.json(updatedPost);
 };
+
+export const getPost = async (req, res) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json(`No post with id: ${id}`);
+    }
+
+    try {
+        const post = await Post.findOne({ _id: id });
+
+        res.status(200).json({ data: post });
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};

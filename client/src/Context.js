@@ -4,9 +4,12 @@ const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
     const [currentId, setCurrentId] = useState(null);
+    const [postsCount, setPostsCount] = useState(0);
 
     return (
-        <AppContext.Provider value={{ currentId, setCurrentId }}>
+        <AppContext.Provider
+            value={{ currentId, setCurrentId, postsCount, setPostsCount }}
+        >
             {children}
         </AppContext.Provider>
     );

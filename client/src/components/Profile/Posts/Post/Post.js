@@ -2,45 +2,31 @@ import React, { useState } from "react";
 import "./Post.css";
 
 import { useDispatch } from "react-redux";
-import { deletePost, likePost } from "../../../../actions/posts";
 import { useGlobalContext } from "../../../../Context";
 
-import moment from "moment";
+import { useHistory } from "react-router-dom";
 
 function Post({ post }) {
-    const [user, setUser] = useState(
-        JSON.parse(localStorage.getItem("profile"))
-    );
-    const {
-        selectedFile,
-        caption,
-        creatorId,
-        username,
-        _id,
-        likes,
-        createdAt,
-    } = post;
+    const user = JSON.parse(localStorage.getItem("profile"));
     const { setCurrentId } = useGlobalContext();
-    const dispatch = useDispatch();
+    const history = useHistory();
 
     return (
         <div className="post">
             <div className="post__wrapper">
-                <img src={selectedFile} alt={caption} className="post__image" />
-                {user?.result?._id === creatorId && (
+                <img
+                    src={post.selectedFile}
+                    alt={post.caption}
+                    onClick={() => history.push(`/posts/${post._id}`)}
+                    className="post__image"
+                />
+                {user?.result?._id === post.creatorId && (
                     <>
-                        <button onClick={() => setCurrentId(_id)}>edit</button>
-                        <button onClick={() => dispatch(deletePost(_id))}>
-                            delete
+                        <button onClick={() => setCurrentId(post._id)}>
+                            edit
                         </button>
                     </>
                 )}
-
-                <button onClick={() => dispatch(likePost(_id))}>like</button>
-                <h3>{caption}</h3>
-                <h3>username : {username}</h3>
-                <h4>likes: {likes.length}</h4>
-                <h4>created at: {moment(createdAt).fromNow()}</h4>
             </div>
         </div>
     );

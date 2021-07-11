@@ -1,4 +1,10 @@
-import { READ, CREATE, UPDATE, DELETE } from "../constants/actionTypes.js";
+import {
+    READ,
+    CREATE,
+    UPDATE,
+    DELETE,
+    SHOW,
+} from "../constants/actionTypes.js";
 
 const reducer = (state = [], action) => {
     if (action.type === READ) {
@@ -14,6 +20,9 @@ const reducer = (state = [], action) => {
     }
     if (action.type === DELETE) {
         return state.filter((post) => post._id !== action.payload);
+    }
+    if (action.type === SHOW) {
+        return action.payload;
     }
     return state;
     // throw new Error("No matching action type!");

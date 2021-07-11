@@ -13,4 +13,5 @@
 .post__image {
     object-fit: cover;
     height: 100%;
+    cursor: pointer;
 }
