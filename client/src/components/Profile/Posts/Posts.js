@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { useGlobalContext } from "../../../Context";
 
 function Posts() {
-    const posts = useSelector((state) => state.posts);
+    const { posts } = useSelector((state) => state.posts);
     const { setPostsCount } = useGlobalContext();
     setPostsCount(posts.length);
     console.log(posts);
@@ -14,13 +14,9 @@ function Posts() {
     return (
         <div className="posts">
             <div className="container posts-container">
-                {!posts.length ? (
-                    <h1>Loading...</h1>
-                ) : (
-                    posts.map((post) => {
-                        return <Post post={post} key={post._id} />;
-                    })
-                )}
+                {posts.map((post) => {
+                    return <Post post={post} key={post._id} />;
+                })}
             </div>
         </div>
     );

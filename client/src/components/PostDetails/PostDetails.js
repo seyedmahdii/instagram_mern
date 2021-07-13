@@ -21,7 +21,10 @@ function PostDetails() {
     const { id } = useParams();
     const dispatch = useDispatch();
     const history = useHistory();
-    const { data: post } = useSelector((state) => {
+    const {
+        post: { data: post },
+        isLoading,
+    } = useSelector((state) => {
         return state.posts;
     });
     const user = JSON.parse(localStorage.getItem("profile"));
@@ -30,6 +33,14 @@ function PostDetails() {
     useEffect(() => {
         dispatch(getPost(id));
     }, [id]);
+
+    if (isLoading) {
+        return (
+            <div className="container">
+                <h1>Loading...</h1>
+            </div>
+        );
+    }
 
     const LikeIcon = () => {
         if (post?.likes?.length > 0) {
@@ -80,7 +91,7 @@ function PostDetails() {
                         <a href={`/${post?.username}`}>
                             <img
                                 src={profileImage}
-                                alt="Profile image"
+                                alt="Profile"
                                 className="post-details__profile-image"
                             />
                         </a>
@@ -111,7 +122,7 @@ function PostDetails() {
                     <div className="post-details__image-wrapper">
                         <img
                             src={post?.selectedFile}
-                            alt="Post image:("
+                            alt="Post"
                             className="post-details__image"
                         />
                     </div>
@@ -123,7 +134,7 @@ function PostDetails() {
                             <a href={`/${post?.username}`}>
                                 <img
                                     src={profileImage}
-                                    alt="Profile image"
+                                    alt="Profile"
                                     className="post-details__profile-image"
                                 />
                             </a>
@@ -162,7 +173,7 @@ function PostDetails() {
                             <a href={`/${post?.username}`}>
                                 <img
                                     src={profileImage}
-                                    alt="Profile image"
+                                    alt="Profile"
                                     className="post-details__profile-image"
                                 />
                             </a>

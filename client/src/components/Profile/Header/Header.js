@@ -16,7 +16,7 @@ function Header() {
                 <div className="header__image-wrapper">
                     <img
                         src={Profile}
-                        alt="Username here"
+                        alt="profile"
                         className="header__image"
                     />
                 </div>

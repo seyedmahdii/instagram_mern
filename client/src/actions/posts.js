@@ -5,13 +5,17 @@ import {
     UPDATE,
     DELETE,
     SHOW,
+    START_LOADING,
+    END_LOADING,
 } from "../constants/actionTypes.js";
 
 export const getPosts = (username) => async (dispatch) => {
     try {
+        dispatch({ type: START_LOADING });
         const { data } = await api.getPosts(username);
 
         dispatch({ type: READ, payload: data });
+        dispatch({ type: END_LOADING });
     } catch (error) {
         console.log(error);
     }
@@ -60,10 +64,11 @@ export const likePost = (id) => async (dispatch) => {
 
 export const getPost = (id) => async (dispatch) => {
     try {
+        dispatch({ type: START_LOADING });
         const { data } = await api.getPost(id);
-        console.log("data: ", data);
 
         dispatch({ type: SHOW, payload: data });
+        dispatch({ type: END_LOADING });
     } catch (error) {
         console.log(error);
     }

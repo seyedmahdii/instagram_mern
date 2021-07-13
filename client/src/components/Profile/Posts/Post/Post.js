@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Post.css";
 
-import { useDispatch } from "react-redux";
 import { useGlobalContext } from "../../../../Context";
-
 import { useHistory } from "react-router-dom";
 
 function Post({ post }) {
