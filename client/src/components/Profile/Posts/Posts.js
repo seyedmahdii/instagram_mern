@@ -11,6 +11,14 @@ function Posts() {
     setPostsCount(posts.length);
     console.log(posts);
 
+    if (posts.length === 0) {
+        return (
+            <div className="container">
+                <h1>No posts.</h1>
+            </div>
+        );
+    }
+
     return (
         <div className="posts">
             <div className="container posts-container">

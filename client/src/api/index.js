@@ -26,3 +26,6 @@ export const getPost = (id) => API.get(`/post/${id}`);
 // Auth
 export const register = (formData) => API.post(`/user/register`, formData);
 export const login = (formData) => API.post(`/user/login`, formData);
+
+// Users
+export const searchUsers = (query) => API.get(`/user/search?q=${query}`);

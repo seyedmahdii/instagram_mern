@@ -67,3 +67,17 @@ export const login = async (req, res) => {
         res.status(500).json(error);
     }
 };
+
+export const searchUsers = async (req, res) => {
+    const { q } = req.query;
+
+    try {
+        const title = new RegExp(q);
+        const users = await User.find({
+            $or: [{ username: title }],
+        });
+        res.status(200).json({ data: users });
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};

@@ -5,7 +5,7 @@ import bodyParser from "body-parser";
 import dotenv from "dotenv";
 
 import postRoutes from "./routes/posts.js";
-import authRoutes from "./routes/auth.js";
+import userRoutes from "./routes/users.js";
 
 // App config
 const app = express();
@@ -17,7 +17,7 @@ app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 app.use("/", postRoutes);
-app.use("/user", authRoutes);
+app.use("/user", userRoutes);
 
 // DB config
 mongoose.connect(process.env.CONNECTION_URL, {

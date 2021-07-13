@@ -2,21 +2,24 @@ import React, { useState, useEffect } from "react";
 import "./Navbar.css";
 import "./../../App.css";
 import Logo from "./../../images/logo.png";
+import profile from "../../images/profile.jpg";
 import SearchIcon from "@material-ui/icons/Search";
 
 import { logOut } from "../../actions/auth";
+import { searchUsers } from "../../actions/users";
 import { useHistory, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // import ExploreIcon from "@material-ui/icons/Explore";
 import ExploreOutlinedIcon from "@material-ui/icons/ExploreOutlined";
-import HomeIcon from "@material-ui/icons/Home";
-// import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
+// import HomeIcon from "@material-ui/icons/Home";
+import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 // import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderOutlinedIcon from "@material-ui/icons/FavoriteBorderOutlined";
 // import InboxIcon from "@material-ui/icons/Inbox";
 // import InboxOutlinedIcon from "@material-ui/icons/InboxOutlined";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import CancelIcon from "@material-ui/icons/Cancel";
 
 import decode from "jwt-decode";
 
@@ -24,9 +27,16 @@ function Navbar() {
     const [user, setUser] = useState(
         JSON.parse(localStorage.getItem("profile"))
     );
+    const [searchQuery, setSearchQuery] = useState("");
     const dispatch = useDispatch();
     const history = useHistory();
     const location = useLocation();
+
+    const {
+        users: { data: users },
+        isLoading,
+    } = useSelector((state) => state.users);
+    // console.log(users);
 
     const logout = () => {
         setUser(null);
@@ -42,7 +52,7 @@ function Navbar() {
         if (token) {
             const decodedToken = decode(token);
 
-            if (decodedToken * 1000 < new Date().getTime()) {
+            if (decodedToken.exp * 1000 < new Date().getTime()) {
                 logout();
             }
         }
@@ -60,27 +70,83 @@ function Navbar() {
                         </a>
                     </div>
 
-                    <div className="nav__input-wrapper">
-                        <SearchIcon className="nav__search-icon" />
-                        <input
-                            type="text"
-                            className="nav__input"
-                            placeholder="Search"
-                        />
+                    <div className="nav__search">
+                        <div className="nav__input-wrapper">
+                            <SearchIcon className="nav__search-icon" />
+                            <input
+                                type="text"
+                                value={searchQuery}
+                                onChange={(e) => {
+                                    setSearchQuery(e.target.value.trim());
+                                    dispatch(searchUsers(searchQuery));
+                                }}
+                                className="nav__input"
+                                placeholder="Search"
+                            />
+                            {searchQuery && (
+                                <CancelIcon
+                                    className="nav__clear-input"
+                                    onClick={() => setSearchQuery("")}
+                                />
+                            )}
+                        </div>
+                        <div
+                            className={`nav__search-result ${
+                                searchQuery && `nav__search-result--show`
+                            }`}
+                        >
+                            {isLoading ? (
+                                <h4>Loading...</h4>
+                            ) : (
+                                users?.map((item) => {
+                                    return (
+                                        <a
+                                            href={`/${item.username}`}
+                                            className="nav__search-item"
+                                            title={item.username}
+                                            key={item._id}
+                                        >
+                                            <div className="nav__search-image-box">
+                                                <img
+                                                    src={profile}
+                                                    alt="Profile"
+                                                    className="nav__search-image"
+                                                />
+                                            </div>
+                                            <div className="nav__search-info">
+                                                <h5>{item.username}</h5>
+                                                <span>{item.name}</span>
+                                            </div>
+                                        </a>
+                                    );
+                                })
+                            )}
+
+                            {!isLoading && users?.length === 0 ? (
+                                <div className="nav__search--no-result">
+                                    <span>No results found.</span>
+                                </div>
+                            ) : null}
+                        </div>
                     </div>
 
                     {user ? (
                         <div className="nav__buttons">
-                            <span className="nav__avatar">
-                                {user?.result?.username?.charAt(0)}
-                            </span>
-                            <HomeIcon className="nav__icon logout" />
+                            <HomeOutlinedIcon className="nav__icon logout" />
                             <FavoriteBorderOutlinedIcon className="nav__icon logout" />
                             <ExploreOutlinedIcon className="nav__icon logout" />
                             <ExitToAppIcon
                                 onClick={() => logout()}
                                 className="nav__icon logout"
                             />
+                            <span className="nav__avatar">
+                                {user?.result?.username?.charAt(0)}
+                                {/* <img
+                                    src={profile}
+                                    alt="profile"
+                                    className="avatar__img"
+                                /> */}
+                            </span>
                         </div>
                     ) : (
                         <div className="nav__buttons">
