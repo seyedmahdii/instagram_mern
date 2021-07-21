@@ -24,7 +24,7 @@ const reducer = (state = { isLoading: true, posts: [], post: {} }, action) => {
     if (action.type === UPDATE) {
         return {
             ...state,
-            posts: state.map((post) =>
+            posts: state.posts.map((post) =>
                 post._id === action.payload._id ? action.payload : post
             ),
         };

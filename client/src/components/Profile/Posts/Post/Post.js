@@ -1,12 +1,9 @@
 import React from "react";
 import "./Post.css";
 
-import { useGlobalContext } from "../../../../Context";
 import { useHistory } from "react-router-dom";
 
 function Post({ post }) {
-    const user = JSON.parse(localStorage.getItem("profile"));
-    const { setCurrentId } = useGlobalContext();
     const history = useHistory();
 
     return (
@@ -15,16 +12,9 @@ function Post({ post }) {
                 <img
                     src={post.selectedFile}
                     alt={post.caption}
-                    onClick={() => history.push(`/posts/${post._id}`)}
+                    onClick={() => history.push(`/post/${post._id}`)}
                     className="post__image"
                 />
-                {user?.result?._id === post.creatorId && (
-                    <>
-                        <button onClick={() => setCurrentId(post._id)}>
-                            edit
-                        </button>
-                    </>
-                )}
             </div>
         </div>
     );

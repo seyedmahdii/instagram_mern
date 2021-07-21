@@ -6,8 +6,8 @@ import { useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getPost } from "../../actions/posts";
 import moment from "moment";
-
 import { deletePost, likePost } from "../../actions/posts";
+import { useGlobalContext } from "../../Context";
 
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 // import BookmarkIcon from "@material-ui/icons/Bookmark";
@@ -16,6 +16,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import SendIcon from "@material-ui/icons/Send";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
+import EditRoundedIcon from "@material-ui/icons/EditRounded";
 
 function PostDetails() {
     const { id } = useParams();
@@ -28,7 +29,7 @@ function PostDetails() {
         return state.posts;
     });
     const user = JSON.parse(localStorage.getItem("profile"));
-    console.log("post: ", post);
+    const { setCurrentId } = useGlobalContext();
 
     useEffect(() => {
         dispatch(getPost(id));
@@ -110,11 +111,25 @@ function PostDetails() {
                     </div>
                     <div>
                         <MoreHorizIcon className="post-details__more" />
-                        <DeleteOutlineIcon
-                            onClick={() =>
-                                dispatch(post?._id, post?.username, history)
-                            }
-                        />
+                        {user?.result?._id === post?.creatorId && (
+                            <>
+                                <DeleteOutlineIcon
+                                    onClick={() =>
+                                        dispatch(
+                                            post?._id,
+                                            post?.username,
+                                            history
+                                        )
+                                    }
+                                />
+                                <EditRoundedIcon
+                                    onClick={() => {
+                                        setCurrentId(post?._id);
+                                        history.push(`/post/${post?._id}/edit`);
+                                    }}
+                                />
+                            </>
+                        )}
                     </div>
                 </header>
 
@@ -154,17 +169,28 @@ function PostDetails() {
                         </div>
                         <div>
                             <MoreHorizIcon className="post-details__more" />
-                            <DeleteOutlineIcon
-                                onClick={() =>
-                                    dispatch(
-                                        deletePost(
-                                            post._id,
-                                            post?.username,
-                                            history
-                                        )
-                                    )
-                                }
-                            />
+
+                            {user?.result?._id === post?.creatorId && (
+                                <>
+                                    <DeleteOutlineIcon
+                                        onClick={() =>
+                                            dispatch(
+                                                post?._id,
+                                                post?.username,
+                                                history
+                                            )
+                                        }
+                                    />
+                                    <EditRoundedIcon
+                                        onClick={() => {
+                                            setCurrentId(post?._id);
+                                            history.push(
+                                                `/post/${post?._id}/edit`
+                                            );
+                                        }}
+                                    />
+                                </>
+                            )}
                         </div>
                     </header>
 

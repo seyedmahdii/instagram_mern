@@ -4,7 +4,7 @@ import { useGlobalContext } from "../../Context";
 import logo from "../../images/logo.png";
 
 import FileBase from "react-file-base64";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createPost, updatePost } from "../../actions/posts.js";
 
@@ -13,12 +13,15 @@ function Form() {
         caption: "",
         selectedFile: "",
     });
-    const { currentId } = useGlobalContext();
+    // const { currentId } = useGlobalContext();
+    // console.log("currentId ", currentId);
     const dispatch = useDispatch();
     const history = useHistory();
-    const toBeUpdatedPostData = useSelector((state) =>
-        currentId ? state.posts.find((post) => post._id === currentId) : null
-    );
+    const { id } = useParams();
+    const toBeUpdatedPostData = useSelector((state) => {
+        return state?.posts?.post?.data;
+        // id ? state?.posts?.find((post) => post._id === id) : null;
+    });
     const user = JSON.parse(localStorage.getItem("profile"));
 
     useEffect(() => {
@@ -30,11 +33,11 @@ function Form() {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        if (currentId) {
+        if (id) {
             dispatch(
                 updatePost(
                     { ...postData, username: user?.result?.username },
-                    currentId
+                    id
                 )
             );
         } else {
@@ -73,37 +76,40 @@ function Form() {
                                 id="caption"
                                 className="form__input"
                                 onChange={handleChange}
+                                value={postData?.caption}
                                 required
                             />
                             <label htmlFor="caption" className="form__label">
                                 Caption
                             </label>
                         </div>
-                        <div className="form-control">
-                            <label
-                                htmlFor="image"
-                                className="form__label"
-                                style={{ position: "relative" }}
-                            >
-                                Image
-                            </label>
-                            <FileBase
-                                type="file"
-                                id="image"
-                                multiple={false}
-                                onDone={({ base64 }) =>
-                                    setPostData({
-                                        ...postData,
-                                        selectedFile: base64,
-                                    })
-                                }
-                            />
-                        </div>
+                        {!id && (
+                            <div className="form-control">
+                                <label
+                                    htmlFor="image"
+                                    className="form__label"
+                                    style={{ position: "relative" }}
+                                >
+                                    Image
+                                </label>
+                                <FileBase
+                                    type="file"
+                                    id="image"
+                                    multiple={false}
+                                    onDone={({ base64 }) =>
+                                        setPostData({
+                                            ...postData,
+                                            selectedFile: base64,
+                                        })
+                                    }
+                                />
+                            </div>
+                        )}
                         <button
                             type="submit"
                             className="btn btn-primary btn--full-width"
                         >
-                            Post
+                            {id ? `Edit` : `Post`}
                         </button>
                     </form>
                 </div>
@@ -113,40 +119,3 @@ function Form() {
 }
 
 export default Form;
-
-/* <form className="form" autoComplete="off" noValidate onSubmit={handleSubmit}>
-    <div className="form__control">
-        <input
-            type="text"
-            className="form__input"
-            id="caption"
-            value={postData.caption}
-            onChange={(event) =>
-                setPostData({
-                    ...postData,
-                    caption: event.target.value,
-                })
-            }
-        />
-        <label htmlFor="caption" className="form__label">
-            caption
-        </label>
-        <div className="underlined"></div>
-    </div>
-
-    <div className="form__control">
-        <FileBase
-            type="file"
-            multiple={false}
-            onDone={({ base64 }) =>
-                setPostData({ ...postData, selectedFile: base64 })
-            }
-        />
-    </div>
-
-    <div className="form__control">
-        <button className="form__btn" type="submit">
-            post
-        </button>
-    </div>
-</form>; */

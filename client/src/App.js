@@ -36,8 +36,11 @@ function App() {
                             <Login />
                         )}
                     </Route>
-                    <Route path="/posts/:id" exact>
-                        <PostDetails />
+                    <Route path={`/post/:id/edit`} exact>
+                        {user ? <Form /> : <Redirect to="/login" />}
+                    </Route>
+                    <Route path="/post/:id" exact>
+                        {user ? <PostDetails /> : <Redirect to="/login" />}
                     </Route>
                     <Route path="/:username" exact>
                         <Profile />

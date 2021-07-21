@@ -14,6 +14,7 @@ function Register() {
     });
     const dispatch = useDispatch();
     const history = useHistory();
+    const [isPasswordShown, setIsPasswordShown] = useState(false);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -51,7 +52,7 @@ function Register() {
                         </div>
                         <div className="form-control">
                             <input
-                                type="password"
+                                type={isPasswordShown ? `text` : "password"}
                                 name="password"
                                 id="password"
                                 className="form__input"
@@ -62,7 +63,15 @@ function Register() {
                                 Password
                             </label>
 
-                            <button className="toggle-password">Show</button>
+                            <button
+                                className="toggle-password"
+                                onClick={() =>
+                                    setIsPasswordShown(!isPasswordShown)
+                                }
+                                type="button"
+                            >
+                                {isPasswordShown ? `Hide` : `Show`}
+                            </button>
                         </div>
                         <button
                             type="submit"
