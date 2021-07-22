@@ -10,6 +10,7 @@ import NotFound404 from "./components/Error/404/NotFound404";
 import PostDetails from "./components/PostDetails/PostDetails";
 
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import EditProfile from "./components/EditProfile/EditProfile";
 
 function App() {
     const user = JSON.parse(localStorage.getItem("profile"));
@@ -36,7 +37,7 @@ function App() {
                             <Login />
                         )}
                     </Route>
-                    <Route path={`/post/:id/edit`} exact>
+                    <Route path="/post/:id/edit" exact>
                         {user ? <Form /> : <Redirect to="/login" />}
                     </Route>
                     <Route path="/post/:id" exact>
@@ -44,6 +45,9 @@ function App() {
                     </Route>
                     <Route path="/:username" exact>
                         <Profile />
+                    </Route>
+                    <Route path="/accounts/edit" exact>
+                        {user ? <EditProfile /> : <Redirect to="/login" />}
                     </Route>
                     <NotFound404 />
                 </Switch>

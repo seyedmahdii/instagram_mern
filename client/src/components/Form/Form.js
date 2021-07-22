@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "../../App.css";
-import { useGlobalContext } from "../../Context";
 import logo from "../../images/logo.png";
 
 import FileBase from "react-file-base64";
@@ -13,8 +12,6 @@ function Form() {
         caption: "",
         selectedFile: "",
     });
-    // const { currentId } = useGlobalContext();
-    // console.log("currentId ", currentId);
     const dispatch = useDispatch();
     const history = useHistory();
     const { id } = useParams();

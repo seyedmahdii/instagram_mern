@@ -57,6 +57,9 @@ a {
 .btn-bordered-default {
     border-color: rgb(216, 219, 219);
 }
+.btn-bordered-default:visited {
+    color: #262626;
+}
 .btn-primary:hover {
     background-color: #0075f3;
 }

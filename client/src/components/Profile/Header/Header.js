@@ -25,7 +25,10 @@ function Header() {
                     <div className="header__top">
                         <h2 className="header__username">{username}</h2>
                         <div className="header__btn-container">
-                            <a className="btn btn-bordered btn-bordered-default">
+                            <a
+                                href="/accounts/edit"
+                                className="btn btn-bordered btn-bordered-default"
+                            >
                                 Edit Profile
                             </a>
                             <SettingsIcon className="header__settings-btn" />
