@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Navbar.css";
 import "./../../App.css";
 import Logo from "./../../images/logo.png";
-import profile from "../../images/profile.jpg";
+import defaultProfile from "../../images/defaultProfile.png";
 import SearchIcon from "@material-ui/icons/Search";
 
 import { logOut } from "../../actions/auth";
@@ -36,7 +36,6 @@ function Navbar() {
         users: { data: users },
         isLoading,
     } = useSelector((state) => state.users);
-    // console.log(users);
 
     const logout = () => {
         setUser(null);
@@ -108,7 +107,11 @@ function Navbar() {
                                         >
                                             <div className="nav__search-image-box">
                                                 <img
-                                                    src={profile}
+                                                    src={
+                                                        item?.image
+                                                            ? item?.image
+                                                            : defaultProfile
+                                                    }
                                                     alt="Profile"
                                                     className="nav__search-image"
                                                 />
@@ -140,12 +143,15 @@ function Navbar() {
                                 className="nav__icon logout"
                             />
                             <span className="nav__avatar">
-                                {user?.result?.username?.charAt(0)}
-                                {/* <img
-                                    src={profile}
+                                <img
+                                    src={
+                                        user
+                                            ? user?.result?.image
+                                            : defaultProfile
+                                    }
                                     alt="profile"
                                     className="avatar__img"
-                                /> */}
+                                />
                             </span>
                         </div>
                     ) : (

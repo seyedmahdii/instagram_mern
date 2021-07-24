@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./PostDetails.css";
-import profileImage from "../../images/profile.jpg";
+import defaultProfile from "../../images/defaultProfile.png";
 
 import { useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -91,7 +91,7 @@ function PostDetails() {
                     <div className="post-details__profile">
                         <a href={`/${post?.username}`}>
                             <img
-                                src={profileImage}
+                                src={defaultProfile}
                                 alt="Profile"
                                 className="post-details__profile-image"
                             />
@@ -148,7 +148,7 @@ function PostDetails() {
                         <div className="post-details__profile">
                             <a href={`/${post?.username}`}>
                                 <img
-                                    src={profileImage}
+                                    src={defaultProfile}
                                     alt="Profile"
                                     className="post-details__profile-image"
                                 />
@@ -198,7 +198,7 @@ function PostDetails() {
                         <div className="post-details__profile post-details__profile--align-base">
                             <a href={`/${post?.username}`}>
                                 <img
-                                    src={profileImage}
+                                    src={defaultProfile}
                                     alt="Profile"
                                     className="post-details__profile-image"
                                 />

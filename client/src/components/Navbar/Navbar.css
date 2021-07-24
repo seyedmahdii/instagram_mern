@@ -84,6 +84,9 @@
     width: 44px;
 }
 .nav__search-image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
     border-radius: 50%;
 }
 .nav__search-info h5 {
@@ -127,5 +130,8 @@
     font-weight: bold;
 }
 .avatar__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     border-radius: 50%;
 }

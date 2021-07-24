@@ -81,3 +81,33 @@ export const searchUsers = async (req, res) => {
         res.status(500).json(error);
     }
 };
+
+export const editUserProfile = async (req, res) => {
+    const { id: _id } = req.params;
+    const userData = req.body;
+
+    if (!mongoose.Types.ObjectId.isValid(_id)) {
+        return res.status(404).json(`No user with id: ${_id}`);
+    }
+
+    try {
+        const updatedUser = await User.findByIdAndUpdate(_id, userData, {
+            new: true,
+        });
+        res.status(200).json(updatedUser);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};
+
+export const getUserProfile = async (req, res) => {
+    const { username } = req.params;
+
+    try {
+        const userProfile = await User.findOne({ username });
+
+        res.status(200).json(userProfile);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};

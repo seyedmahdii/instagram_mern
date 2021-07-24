@@ -7,6 +7,7 @@ import Posts from "./Posts/Posts";
 import { useDispatch, useSelector } from "react-redux";
 import { getPosts } from "../../actions/posts";
 import { useParams } from "react-router-dom";
+import { getUserProfile } from "../../actions/users.js";
 
 function Profile() {
     const dispatch = useDispatch();
@@ -15,6 +16,7 @@ function Profile() {
     const { isLoading } = useSelector((state) => state.posts);
 
     useEffect(() => {
+        dispatch(getUserProfile(username));
         dispatch(getPosts(username));
     }, [currentId, dispatch]);
 

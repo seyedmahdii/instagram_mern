@@ -1,21 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Header.css";
-import Profile from "../../../images/profile.jpg";
+import defaultProfile from "../../../images/defaultProfile.png";
 import SettingsIcon from "@material-ui/icons/Settings";
 
 import { useParams } from "react-router-dom";
 import { useGlobalContext } from "../../../Context";
+import { useSelector } from "react-redux";
 
 function Header() {
+    const loggedUser = JSON.parse(localStorage.getItem("profile"));
+    const userData = useState(useSelector((state) => state.users));
+    const { user } = userData[0];
     const { username } = useParams();
     const { postsCount } = useGlobalContext();
+    console.log("user  ", user);
 
     return (
         <div className="header">
             <div className="container header-container">
                 <div className="header__image-wrapper">
                     <img
-                        src={Profile}
+                        src={user?.image ? user?.image : defaultProfile}
                         alt="profile"
                         className="header__image"
                     />
@@ -23,7 +28,7 @@ function Header() {
 
                 <div className="header__profile">
                     <div className="header__top">
-                        <h2 className="header__username">{username}</h2>
+                        <h2 className="header__username">{user?.username}</h2>
                         <div className="header__btn-container">
                             <a
                                 href="/accounts/edit"
@@ -39,34 +44,30 @@ function Header() {
                         <div className="header__follow-item">
                             <span className="header__data header__posts">
                                 {postsCount}
-                            </span>{" "}
-                            posts
+                            </span>
+                            &nbsp;posts
                         </div>
 
                         <div className="header__follow-item">
                             <span className="header__data header__followers">
                                 216
-                            </span>{" "}
-                            followers
+                            </span>
+                            &nbsp;followers
                         </div>
 
                         <div className="header__follow-item">
                             <span className="header__data header__following">
                                 158
-                            </span>{" "}
-                            following
+                            </span>
+                            &nbsp;following
                         </div>
                     </div>
 
                     <div className="header__info">
-                        <h1 className="header__name">Seyed Mahdi Jalali</h1>
-                        <span className="header__description">
-                            Web developer Forgot to die behind my pc👨‍💻
-                            <br />
-                            Learned to strengthen my land in my head🛀
-                        </span>
-                        <a href="#" className="header__url">
-                            seyedmahdijalali.ir
+                        <h1 className="header__name">{user?.name}</h1>
+                        <span className="header__description">{user?.bio}</span>
+                        <a href={user?.website} className="header__url">
+                            {user?.website}
                         </a>
                     </div>
                 </div>

@@ -37,9 +37,13 @@
 .edit-profile__image-wrapper {
     margin-right: 1.6rem;
     width: 40px;
+    height: 40px;
 }
 .edit-profile__image {
     border-radius: 50%;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
 }
 .edit-profile__image-username h4 {
     font-size: 1.2rem;

@@ -1,15 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import "./EditProfile.css";
-import profile from "../../images/profile.jpg";
+import defaultProfile from "../../images/defaultProfile.png";
 import FileBase from "react-file-base64";
 
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { updateUserProfile } from "../../actions/users";
+
 function EditProfile() {
+    let user = JSON.parse(localStorage.getItem("profile"));
+    const [userData, setUserData] = useState({
+        name: user?.result?.name,
+        username: user?.result?.username,
+        website: user?.result?.website,
+        bio: user?.result?.bio,
+    });
+    console.log("logged  ", user);
+    const dispatch = useDispatch();
+    const history = useHistory();
+
     const handleSubmit = (event) => {
         event.preventDefault();
+
+        dispatch(
+            updateUserProfile(
+                user?.result?._id,
+                userData,
+                history,
+                userData?.username
+            )
+        );
+        localStorage.clear();
+        user = { ...user, result: { ...user?.result, ...userData } };
+        localStorage.setItem("profile", JSON.stringify(user));
     };
 
     const handleChange = (event) => {
-        //
+        const name = event.target.name;
+        const value = event.target.value;
+        setUserData({ ...userData, [name]: value });
     };
 
     return (
@@ -81,20 +110,30 @@ function EditProfile() {
                     <div className="edit-profile__select-image">
                         <div className="edit-profile__image-wrapper">
                             <img
-                                src={profile}
+                                src={
+                                    user?.result?.image
+                                        ? user?.result?.image
+                                        : defaultProfile
+                                }
                                 alt="Profile"
                                 className="edit-profile__image"
                             />
                         </div>
                         <div className="edit-profile__image-username">
-                            <h4>seyedmahdii</h4>
-                            <FileBase className="edit-profile__ul-btn" />
+                            <h4>{user?.result?.username}</h4>
+                            <FileBase
+                                type="file"
+                                multiple={false}
+                                onDone={({ base64 }) =>
+                                    setUserData({ ...userData, image: base64 })
+                                }
+                                className="edit-profile__ul-btn"
+                            />
                         </div>
                     </div>
 
                     <form
                         className="edit-profile__form"
-                        noValidate
                         autoComplete="off"
                         onSubmit={handleSubmit}
                     >
@@ -106,6 +145,7 @@ function EditProfile() {
                                     id="name"
                                     className="form__input"
                                     onChange={handleChange}
+                                    value={userData?.name}
                                     required
                                 />
                                 <label htmlFor="name" className="form__label">
@@ -127,6 +167,7 @@ function EditProfile() {
                                     id="username"
                                     className="form__input"
                                     onChange={handleChange}
+                                    value={userData?.username}
                                     required
                                 />
                                 <label
@@ -146,12 +187,12 @@ function EditProfile() {
                         <div className="edit-profile__section">
                             <div className="form-control">
                                 <input
-                                    type="text"
+                                    type="url"
                                     name="website"
                                     id="website"
                                     className="form__input"
                                     onChange={handleChange}
-                                    required
+                                    value={userData?.website}
                                 />
                                 <label
                                     htmlFor="website"
@@ -170,7 +211,7 @@ function EditProfile() {
                                     id="bio"
                                     className="form__input"
                                     onChange={handleChange}
-                                    required
+                                    value={userData?.bio}
                                 />
                                 <label htmlFor="bio" className="form__label">
                                     Bio

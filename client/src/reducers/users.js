@@ -2,9 +2,11 @@ import {
     END_LOADING,
     SEARCH_USERS,
     START_LOADING,
+    UPDATE_USER_PROFILE,
+    GET_USER_PROFILE,
 } from "../constants/actionTypes.js";
 
-const reducer = (state = { isLoading: false, users: [] }, action) => {
+const reducer = (state = { isLoading: false, users: [], user: {} }, action) => {
     if (action.type === SEARCH_USERS) {
         return { ...state, users: action.payload };
     }
@@ -13,6 +15,12 @@ const reducer = (state = { isLoading: false, users: [] }, action) => {
     }
     if (action.type === END_LOADING) {
         return { ...state, isLoading: false };
+    }
+    if (action.type === UPDATE_USER_PROFILE) {
+        return { ...state, user: action.payload };
+    }
+    if (action.type === GET_USER_PROFILE) {
+        return { ...state, user: action.payload };
     }
     return state;
 };
