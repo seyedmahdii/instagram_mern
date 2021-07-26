@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../Auth.css";
 import logo from "../../../images/logo.png";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { login } from "../../../actions/auth";
@@ -15,6 +15,7 @@ function Register() {
     const dispatch = useDispatch();
     const history = useHistory();
     const [isPasswordShown, setIsPasswordShown] = useState(false);
+    const { errorMessage } = useSelector((state) => state.auth);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -80,6 +81,10 @@ function Register() {
                             Log in
                         </button>
                     </form>
+
+                    <div className="auth__error">
+                        <span className="error">{errorMessage}</span>
+                    </div>
 
                     <footer className="auth__footer">
                         <a href="#" className="footer-link">

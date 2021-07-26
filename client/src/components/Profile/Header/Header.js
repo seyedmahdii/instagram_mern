@@ -13,7 +13,6 @@ function Header() {
     const { user } = userData[0];
     const { username } = useParams();
     const { postsCount } = useGlobalContext();
-    console.log("user  ", user);
 
     return (
         <div className="header">

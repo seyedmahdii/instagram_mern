@@ -22,6 +22,14 @@
     width: 140px;
 }
 
+.auth__error {
+    margin: 1rem;
+}
+.error {
+    color: #ed4956;
+    font-size: 0.9rem;
+}
+
 .auth__footer {
     margin: 1rem;
     color: #9e9e9e;

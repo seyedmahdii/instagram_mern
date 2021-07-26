@@ -4,9 +4,9 @@ import defaultProfile from "../../images/defaultProfile.png";
 
 import { useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getPost } from "../../actions/posts";
 import moment from "moment";
-import { deletePost, likePost } from "../../actions/posts";
+import { getPost, deletePost, likePost } from "../../actions/posts";
+import { getUserProfile } from "../../actions/users";
 import { useGlobalContext } from "../../Context";
 
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
@@ -26,9 +26,10 @@ function PostDetails() {
         post: { data: post },
         isLoading,
     } = useSelector((state) => {
+        console.log("state  ", state);
         return state.posts;
     });
-    const user = JSON.parse(localStorage.getItem("profile"));
+    const loggedUser = JSON.parse(localStorage.getItem("profile"));
     const { setCurrentId } = useGlobalContext();
 
     useEffect(() => {
@@ -45,7 +46,9 @@ function PostDetails() {
 
     const LikeIcon = () => {
         if (post?.likes?.length > 0) {
-            return post?.likes?.find((like) => like === user?.result?._id) ? (
+            return post?.likes?.find(
+                (like) => like === loggedUser?.result?._id
+            ) ? (
                 <FavoriteIcon className="post-details__icon post-details__icon--liked" />
             ) : (
                 <FavoriteBorderIcon className="post-details__icon" />
@@ -57,7 +60,9 @@ function PostDetails() {
 
     const LikeText = () => {
         if (post?.likes?.length > 0) {
-            return post?.likes?.find((like) => like === user?.result?._id) ? (
+            return post?.likes?.find(
+                (like) => like === loggedUser?.result?._id
+            ) ? (
                 <>
                     {post.likes.length > 2 ? (
                         <span>
@@ -91,7 +96,11 @@ function PostDetails() {
                     <div className="post-details__profile">
                         <a href={`/${post?.username}`}>
                             <img
-                                src={defaultProfile}
+                                src={
+                                    loggedUser
+                                        ? loggedUser?.result?.image
+                                        : defaultProfile
+                                }
                                 alt="Profile"
                                 className="post-details__profile-image"
                             />
@@ -111,7 +120,7 @@ function PostDetails() {
                     </div>
                     <div>
                         <MoreHorizIcon className="post-details__more" />
-                        {user?.result?._id === post?.creatorId && (
+                        {loggedUser?.result?._id === post?.creatorId && (
                             <>
                                 <DeleteOutlineIcon
                                     onClick={() =>
@@ -148,7 +157,11 @@ function PostDetails() {
                         <div className="post-details__profile">
                             <a href={`/${post?.username}`}>
                                 <img
-                                    src={defaultProfile}
+                                    src={
+                                        loggedUser
+                                            ? loggedUser?.result?.image
+                                            : defaultProfile
+                                    }
                                     alt="Profile"
                                     className="post-details__profile-image"
                                 />
@@ -170,7 +183,7 @@ function PostDetails() {
                         <div>
                             <MoreHorizIcon className="post-details__more" />
 
-                            {user?.result?._id === post?.creatorId && (
+                            {loggedUser?.result?._id === post?.creatorId && (
                                 <>
                                     <DeleteOutlineIcon
                                         onClick={() =>
@@ -198,7 +211,11 @@ function PostDetails() {
                         <div className="post-details__profile post-details__profile--align-base">
                             <a href={`/${post?.username}`}>
                                 <img
-                                    src={defaultProfile}
+                                    src={
+                                        loggedUser
+                                            ? loggedUser?.result?.image
+                                            : defaultProfile
+                                    }
                                     alt="Profile"
                                     className="post-details__profile-image"
                                 />

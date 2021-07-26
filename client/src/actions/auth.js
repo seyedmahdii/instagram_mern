@@ -1,5 +1,5 @@
 import * as api from "../api/index";
-import { LOGOUT, AUTH } from "../constants/actionTypes";
+import { LOGOUT, AUTH, AUTH_ERROR } from "../constants/actionTypes";
 
 export const logOut = () => async (dispatch) => {
     dispatch({ type: LOGOUT });
@@ -11,7 +11,10 @@ export const register = (formData, history) => async (dispatch) => {
         dispatch({ type: AUTH, data });
         history.push("/");
     } catch (error) {
-        console.log(error);
+        dispatch({
+            type: AUTH_ERROR,
+            payload: error.response.data,
+        });
     }
 };
 
@@ -22,6 +25,9 @@ export const login = (formData, history) => async (dispatch) => {
 
         history.push("/");
     } catch (error) {
-        console.log(error);
+        dispatch({
+            type: AUTH_ERROR,
+            payload: error.response.data,
+        });
     }
 };

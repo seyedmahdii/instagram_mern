@@ -145,7 +145,7 @@ function Navbar() {
                             <span className="nav__avatar">
                                 <img
                                     src={
-                                        user
+                                        user?.result?.image
                                             ? user?.result?.image
                                             : defaultProfile
                                     }

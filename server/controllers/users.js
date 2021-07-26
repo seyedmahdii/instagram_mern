@@ -11,13 +11,11 @@ export const register = async (req, res) => {
         const existingUser = await User.findOne({ email });
 
         if (existingUser) {
-            return res.status(400).json({
-                message: `User with email:${email} already exists!`,
-            });
+            return res.status(400).json(`Another account is using ${email}.`);
         }
 
         if (password !== confirmPassword) {
-            return res.status(400).json({ message: `Passwords don't match!` });
+            return res.status(400).json(`Passwords don't match!`);
         }
 
         const hashedPassword = await bcrypt.hash(password, 12);
@@ -46,16 +44,22 @@ export const login = async (req, res) => {
 
         if (!existingUser) {
             return res
-                .status(400)
-                .json({ message: `No user with email: ${email}` });
+                .status(404)
+                .json(
+                    `The username you entered doesn't belong to an account. Please check your username and try again.`
+                );
         }
 
-        const isPasswordCorrect = bcrypt.compare(
+        const isPasswordCorrect = await bcrypt.compare(
             password,
             existingUser.password
         );
         if (!isPasswordCorrect) {
-            return res.status(400).json(`Incorrect password!`);
+            return res
+                .status(400)
+                .json(
+                    `Sorry, your password was incorrect. Please double-check your password.`
+                );
         }
 
         const token = jwt.sign({ email, id: existingUser._id }, "testPass", {
