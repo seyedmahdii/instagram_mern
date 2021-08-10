@@ -8,6 +8,14 @@ const userSchema = mongoose.Schema({
     website: { type: String, required: false },
     bio: { type: String, required: false },
     image: { type: String, required: false },
+    followers: {
+        type: [String],
+        default: [],
+    },
+    followings: {
+        type: [String],
+        default: [],
+    },
     id: String,
 });
 

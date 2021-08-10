@@ -4,6 +4,7 @@ import {
     GET_USER_PROFILE,
     SEARCH_USERS,
     START_LOADING,
+    UPDATE,
     UPDATE_USER_PROFILE,
 } from "../constants/actionTypes.js";
 
@@ -35,6 +36,15 @@ export const getUserProfile = (username) => async (dispatch) => {
         const { data } = await api.getUserProfile(username);
         dispatch({ type: GET_USER_PROFILE, payload: data });
         dispatch({ type: END_LOADING });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const followUser = (id) => async (dispatch) => {
+    try {
+        const { data } = await api.followUser(id);
+        dispatch({ type: UPDATE, payload: data });
     } catch (error) {
         console.log(error);
     }

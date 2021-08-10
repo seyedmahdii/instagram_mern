@@ -16,7 +16,7 @@ const reducer = (state = { isLoading: true, posts: [], post: {} }, action) => {
         return { ...state, isLoading: false };
     }
     if (action.type === READ) {
-        return { ...state, posts: action.payload };
+        return { ...state, posts: action.payload, isLoading: state.isLoading };
     }
     if (action.type === CREATE) {
         return { ...state, posts: [...state.posts, action.payload] };

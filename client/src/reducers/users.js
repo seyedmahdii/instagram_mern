@@ -4,9 +4,10 @@ import {
     START_LOADING,
     UPDATE_USER_PROFILE,
     GET_USER_PROFILE,
+    UPDATE,
 } from "../constants/actionTypes.js";
 
-const reducer = (state = { isLoading: false, users: [], user: {} }, action) => {
+const reducer = (state = { isLoading: true, users: [], user: {} }, action) => {
     if (action.type === SEARCH_USERS) {
         return { ...state, users: action.payload };
     }
@@ -20,6 +21,9 @@ const reducer = (state = { isLoading: false, users: [], user: {} }, action) => {
         return { ...state, user: action.payload };
     }
     if (action.type === GET_USER_PROFILE) {
+        return { ...state, user: action.payload };
+    }
+    if (action.type === UPDATE) {
         return { ...state, user: action.payload };
     }
     return state;

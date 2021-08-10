@@ -32,3 +32,4 @@ export const searchUsers = (query) => API.get(`/user/search?q=${query}`);
 export const updateUserProfile = (id, updatedUser) =>
     API.patch(`/user/${id}/edit`, updatedUser);
 export const getUserProfile = (username) => API.get(`/user/${username}`);
+export const followUser = (id) => API.patch(`/user/${id}/follow`);

@@ -13,14 +13,17 @@ function Profile() {
     const dispatch = useDispatch();
     const { currentId } = useGlobalContext();
     const { username } = useParams();
-    const { isLoading } = useSelector((state) => state.posts);
+    const { isLoading: isPostsLoading } = useSelector((state) => state.posts);
+    const { isLoading: isProfileHeaderLoading } = useSelector(
+        (state) => state.users
+    );
 
     useEffect(() => {
         dispatch(getUserProfile(username));
         dispatch(getPosts(username));
     }, [currentId, dispatch]);
 
-    if (isLoading) {
+    if (isPostsLoading || isProfileHeaderLoading) {
         return (
             <div className="container">
                 <h1>Loading...</h1>

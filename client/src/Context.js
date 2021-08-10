@@ -8,7 +8,12 @@ const AppProvider = ({ children }) => {
 
     return (
         <AppContext.Provider
-            value={{ currentId, setCurrentId, postsCount, setPostsCount }}
+            value={{
+                currentId,
+                setCurrentId,
+                postsCount,
+                setPostsCount,
+            }}
         >
             {children}
         </AppContext.Provider>

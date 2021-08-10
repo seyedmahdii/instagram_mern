@@ -115,3 +115,52 @@ export const getUserProfile = async (req, res) => {
         res.status(500).json(error);
     }
 };
+
+export const followUser = async (req, res) => {
+    const { id: _id } = req.params;
+
+    // Not authenticaed user
+    if (!req.userId) {
+        return res.status(401).json(`Sing in to follow users`);
+    }
+
+    if (!mongoose.Types.ObjectId.isValid(_id)) {
+        return res.status(404).json(`No user with id: ${_id} to follow!`);
+    }
+
+    if (req.userId === _id) {
+        return res.json(`You can't follow yourself`);
+    }
+
+    let toBeFollowedUser = await User.findById(_id);
+    let loggedUser = await User.findById(req.userId);
+
+    const index = toBeFollowedUser.followers.findIndex(
+        (id) => id === String(req.userId)
+    );
+    if (index === -1) {
+        toBeFollowedUser.followers.push(req.userId);
+        loggedUser.followings.push(_id);
+    } else {
+        toBeFollowedUser.followers = toBeFollowedUser.followers.filter(
+            (id) => id !== String(req.userId)
+        );
+        loggedUser.followings = loggedUser.followings.filter(
+            (id) => id !== String(_id)
+        );
+    }
+
+    const updatedFollowedUser = await User.findByIdAndUpdate(
+        _id,
+        toBeFollowedUser,
+        { new: true }
+    );
+    const updatedLoggedUser = await User.findByIdAndUpdate(
+        req.userId,
+        loggedUser,
+        {
+            new: true,
+        }
+    );
+    res.status(200).json(updatedFollowedUser);
+};

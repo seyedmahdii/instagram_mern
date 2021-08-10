@@ -63,6 +63,9 @@ a {
 .btn-primary:hover {
     background-color: #0075f3;
 }
+.btn-mh {
+    margin: 0 3px;
+}
 
 @media all and (min-width: 1100px) {
     .container {

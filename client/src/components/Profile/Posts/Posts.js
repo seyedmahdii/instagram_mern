@@ -7,11 +7,12 @@ import { useGlobalContext } from "../../../Context";
 
 function Posts() {
     const { posts } = useSelector((state) => state.posts);
+    const { isLoading } = useSelector((state) => state.posts);
     const { setPostsCount } = useGlobalContext();
     setPostsCount(posts.length);
-    console.log(posts);
+    // console.log(posts);
 
-    if (posts.length === 0) {
+    if (posts.length && !isLoading === 0) {
         return (
             <div className="container">
                 <h1>No posts.</h1>
