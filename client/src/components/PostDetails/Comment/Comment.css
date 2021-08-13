@@ -9,16 +9,21 @@
     height: 30px;
     width: 30px;
     border-radius: 100%;
-    object-fit: contain;
+    object-fit: cover;
 }
 .comment-info {
     display: flex;
+    flex: 1;
+}
+.comment-info__main {
+    flex: 1;
 }
 .comment-username {
     font-size: 13px;
 }
 .comment-text {
     color: rgb(49, 49, 49);
+    font-size: 0.9rem;
 }
 .comment-like {
     margin-left: 10px;

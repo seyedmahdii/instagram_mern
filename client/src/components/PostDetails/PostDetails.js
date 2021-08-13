@@ -1,12 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./PostDetails.css";
 import defaultProfile from "../../images/defaultProfile.png";
 
 import { useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
-import { getPost, deletePost, likePost } from "../../actions/posts";
-import { getUserProfile } from "../../actions/users";
+import { getPost, deletePost, likePost, updatePost } from "../../actions/posts";
 import { useGlobalContext } from "../../Context";
 import Comment from "./Comment/Comment";
 
@@ -19,6 +18,7 @@ import SendIcon from "@material-ui/icons/Send";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import EditRoundedIcon from "@material-ui/icons/EditRounded";
 import ChatBubbleOutlineRoundedIcon from "@material-ui/icons/ChatBubbleOutlineRounded";
+import SentimentSatisfiedRoundedIcon from "@material-ui/icons/SentimentSatisfiedRounded";
 
 function PostDetails() {
     const { id } = useParams();
@@ -28,15 +28,41 @@ function PostDetails() {
         post: { data: post },
         isLoading,
     } = useSelector((state) => {
-        console.log("state  ", state);
         return state.posts;
     });
     const loggedUser = JSON.parse(localStorage.getItem("profile"));
     const { setCurrentId } = useGlobalContext();
+    const [enteredComment, setEnteredComment] = useState("");
+    console.log("post  ", post);
+
+    const submitComment = (e) => {
+        e.preventDefault();
+        if (enteredComment) {
+            dispatch(
+                updatePost(
+                    {
+                        ...post,
+                        comments: [
+                            ...post.comments,
+                            {
+                                userId: loggedUser.result._id,
+                                username: loggedUser.result.username,
+                                userImage: loggedUser.result.image,
+                                comment: enteredComment,
+                                createdAt: new Date().toISOString(),
+                            },
+                        ],
+                    },
+                    post?._id
+                )
+            );
+            setEnteredComment("");
+        }
+    };
 
     useEffect(() => {
         dispatch(getPost(id));
-    }, [id]);
+    }, [id, dispatch]);
 
     if (isLoading) {
         return (
@@ -246,8 +272,9 @@ function PostDetails() {
                         </div>
 
                         <div className="post-details__comments">
-                            <Comment />
-                            <Comment />
+                            {post?.comments?.map((comment) => (
+                                <Comment comment={comment} key={comment._id} />
+                            ))}
                         </div>
                     </div>
 
@@ -260,11 +287,9 @@ function PostDetails() {
                                 >
                                     <LikeIcon />
                                 </button>
-
                                 <button className="post-details__button mr">
                                     <ChatBubbleOutlineRoundedIcon className="post-details__icon" />
                                 </button>
-
                                 <button className="post-details__button mr">
                                     <SendIcon className="post-details__icon" />
                                 </button>
@@ -282,6 +307,27 @@ function PostDetails() {
                         </div>
                         <div className="post-details__date">
                             {moment(post?.createdAt).fromNow()}
+                        </div>
+
+                        <div className="post-details__inputContainer">
+                            <SentimentSatisfiedRoundedIcon className="post-details__input-emoji" />
+                            <input
+                                type="text"
+                                placeholder="Add a comment..."
+                                className="post-details__input"
+                                value={enteredComment}
+                                onChange={(e) =>
+                                    setEnteredComment(e.target.value)
+                                }
+                            />
+                            <button
+                                type="submit"
+                                className="btn color-primary"
+                                disabled={!enteredComment ? true : false}
+                                onClick={submitComment}
+                            >
+                                Post
+                            </button>
                         </div>
                     </footer>
                 </aside>

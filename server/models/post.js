@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+const Schema = mongoose.Schema;
 
 const postSchema = mongoose.Schema({
     caption: String,
@@ -12,6 +13,21 @@ const postSchema = mongoose.Schema({
     createdAt: {
         type: Date,
         default: new Date(),
+    },
+    comments: {
+        type: [
+            {
+                userId: String,
+                username: String,
+                userImage: String,
+                comment: String,
+                createdAt: {
+                    type: Date,
+                    default: new Date(),
+                },
+            },
+        ],
+        default: [],
     },
 });
 

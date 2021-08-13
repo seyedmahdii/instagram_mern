@@ -46,6 +46,9 @@ a {
 .color-primary {
     color: #007bff;
 }
+.color-primary:disabled {
+    color: #85c0ff;
+}
 .btn-primary {
     color: #fff;
     background-color: #007bff;
