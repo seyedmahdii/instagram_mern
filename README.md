@@ -10,8 +10,8 @@ run <code>npm i && npm start</code> for both client and server side to start the
   <li>liking a post</li>
   <li>following other users</li>
   <li>editing profile</li>
+  <li>comment</li>
   <li>direct message <i>(upcoming)</i></li>
-  <li>comment <i>(upcoming)</i></li>
 </ul>
 
 ![Screenshot (2386)](https://user-images.githubusercontent.com/75500354/128904518-03dde22f-0568-4181-addd-c8a60d977951.png)
