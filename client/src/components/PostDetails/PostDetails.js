@@ -8,6 +8,7 @@ import moment from "moment";
 import { getPost, deletePost, likePost } from "../../actions/posts";
 import { getUserProfile } from "../../actions/users";
 import { useGlobalContext } from "../../Context";
+import Comment from "./Comment/Comment";
 
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 // import BookmarkIcon from "@material-ui/icons/Bookmark";
@@ -17,6 +18,7 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import SendIcon from "@material-ui/icons/Send";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import EditRoundedIcon from "@material-ui/icons/EditRounded";
+import ChatBubbleOutlineRoundedIcon from "@material-ui/icons/ChatBubbleOutlineRounded";
 
 function PostDetails() {
     const { id } = useParams();
@@ -242,6 +244,11 @@ function PostDetails() {
                                 </div>
                             </div>
                         </div>
+
+                        <div className="post-details__comments">
+                            <Comment />
+                            <Comment />
+                        </div>
                     </div>
 
                     <footer className="post-details__footer">
@@ -252,6 +259,10 @@ function PostDetails() {
                                     onClick={() => dispatch(likePost(post._id))}
                                 >
                                     <LikeIcon />
+                                </button>
+
+                                <button className="post-details__button mr">
+                                    <ChatBubbleOutlineRoundedIcon className="post-details__icon" />
                                 </button>
 
                                 <button className="post-details__button mr">
@@ -270,7 +281,7 @@ function PostDetails() {
                             <LikeText />
                         </div>
                         <div className="post-details__date">
-                            NOVEMBER 20, 2020
+                            {moment(post?.createdAt).fromNow()}
                         </div>
                     </footer>
                 </aside>

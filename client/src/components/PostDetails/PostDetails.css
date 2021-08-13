@@ -70,6 +70,9 @@
 }
 .post-details__post-info {
     padding: 1.3rem 1rem;
+    flex: 1;
+    overflow: auto;
+    max-height: 400px;
 }
 .post-details__caption {
     margin-top: 0.6rem;
