@@ -1,0 +1,6 @@
+.chatroom__messages {
+    padding: 0.9rem 1.1rem 0rem 1.1rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden auto;
+}

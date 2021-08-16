@@ -32,7 +32,7 @@ const reducer = (state = { isLoading: true, posts: [], post: {} }, action) => {
     if (action.type === DELETE) {
         return {
             ...state,
-            posts: state.filter((post) => post._id !== action.payload),
+            posts: state.posts.filter((post) => post._id !== action.payload),
         };
     }
     if (action.type === SHOW) {

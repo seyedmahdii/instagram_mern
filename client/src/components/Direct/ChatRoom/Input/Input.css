@@ -1,0 +1,22 @@
+.chatroom__input-container {
+    padding: 0.6rem;
+    margin: 0.8rem;
+    border-radius: 25px;
+    border: 1px solid #dbdbdb;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.chatroom__input {
+    flex: 1;
+    margin: 0 0.7rem;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+}
+.chatroom__input-icon {
+    color: rgb(71, 71, 71) !important;
+    font-size: 1.7rem !important;
+    margin-right: 0.3rem;
+    cursor: pointer;
+}

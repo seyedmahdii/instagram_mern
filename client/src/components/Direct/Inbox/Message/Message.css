@@ -1,0 +1,37 @@
+.message {
+    background: white;
+}
+.message:hover,
+.message--active {
+    background-color: rgb(249, 249, 249);
+}
+.message__link {
+    padding: 0.7rem 1.2rem;
+    display: flex;
+    align-items: center;
+}
+.message__image-container {
+    margin-right: 0.5rem;
+}
+.message__image {
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+    border: 1px solid rgb(223, 223, 223);
+}
+.message__info {
+}
+.message__username {
+    color: rgb(17, 17, 17);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+.message__last-message {
+    color: gray;
+    font-size: 0.8rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}

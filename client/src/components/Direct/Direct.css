@@ -1,0 +1,19 @@
+.direct {
+    border: 1px solid #dbdbdb;
+    display: flex;
+    flex-direction: column-reverse;
+    border-radius: 3px;
+    background-color: white;
+    margin: 1rem 0;
+    max-height: 82vh;
+}
+
+@media all and (min-width: 735px) {
+    .direct {
+        flex-direction: row;
+    }
+    .edit-profile__content {
+        padding: 1rem 2.5rem;
+        margin: 0 5rem;
+    }
+}

@@ -21,7 +21,7 @@ function Profile() {
     useEffect(() => {
         dispatch(getUserProfile(username));
         dispatch(getPosts(username));
-    }, [currentId, dispatch]);
+    }, [currentId, dispatch, username]);
 
     if (isPostsLoading || isProfileHeaderLoading) {
         return (

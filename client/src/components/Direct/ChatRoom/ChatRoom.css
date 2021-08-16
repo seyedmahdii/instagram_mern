@@ -1,0 +1,40 @@
+.chatroom {
+    background-color: white;
+    flex: 0.65;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.chatroom__header {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #dbdbdb;
+    color: rgb(43, 43, 43) !important;
+    font-weight: 500;
+    min-height: 63px;
+}
+.chatroom__header-left {
+    display: flex;
+    align-items: center;
+}
+.chatroom__header-image {
+    height: 25px;
+    width: 25px;
+    border-radius: 100%;
+    margin-right: 0.5rem;
+}
+.chatroom__header-info {
+    font-size: 1.7rem !important;
+    cursor: pointer;
+}
+.chatroom__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column-reverse;
+    overflow: auto;
+}
+
+@media all and (min-width: 735px) {
+}

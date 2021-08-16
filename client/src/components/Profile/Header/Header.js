@@ -6,6 +6,7 @@ import SettingsIcon from "@material-ui/icons/Settings";
 import { useGlobalContext } from "../../../Context";
 import { useSelector, useDispatch } from "react-redux";
 import { followUser } from "../../../actions/users";
+import { useHistory } from "react-router-dom";
 
 function Header() {
     const loggedUser = JSON.parse(localStorage.getItem("profile"));
@@ -13,6 +14,7 @@ function Header() {
     const { user } = userData[0];
     const { postsCount } = useGlobalContext();
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const FollowButton = () => {
         return user?.followers?.find((id) => id === loggedUser?.result?._id) ? (
@@ -61,7 +63,12 @@ function Header() {
                             loggedUser?.result?.username !== user?.username && (
                                 <>
                                     <FollowButton />
-                                    <button className="btn btn-bordered-default btn-mh">
+                                    <button
+                                        className="btn btn-bordered-default btn-mh"
+                                        onClick={() =>
+                                            history.push(`/direct/${user?._id}`)
+                                        }
+                                    >
                                         Message
                                     </button>
                                 </>

@@ -34,9 +34,13 @@
 .post-details__info {
     background-color: white;
     flex: 0.35;
-    position: relative;
     display: flex;
     flex-direction: column-reverse;
+    justify-content: space-between;
+}
+.post-details__comments {
+    flex: 1;
+    overflow: auto;
 }
 .post-details__header--lg {
     display: none;
@@ -71,8 +75,6 @@
 .post-details__post-info {
     padding: 1.3rem 1rem;
     flex: 1;
-    overflow: auto;
-    max-height: 200px;
 }
 .post-details__caption {
     margin-top: 0.6rem;
@@ -165,14 +167,6 @@
         border-bottom: 1px solid #efefef;
     }
     .post-details__footer {
-        position: absolute;
-        bottom: 0;
-        left: 0;
         border-top: 1px solid #efefef;
-    }
-}
-@media all and (min-width: 900px) {
-    .post-details__post-info {
-        max-height: 310px;
     }
 }

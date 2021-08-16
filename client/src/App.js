@@ -8,9 +8,10 @@ import Register from "./components/Auth/Register/Register";
 import Login from "./components/Auth/Login/Login";
 import NotFound404 from "./components/Error/404/NotFound404";
 import PostDetails from "./components/PostDetails/PostDetails";
+import EditProfile from "./components/EditProfile/EditProfile";
+import Direct from "./components/Direct/Direct";
 
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import EditProfile from "./components/EditProfile/EditProfile";
 
 function App() {
     const user = JSON.parse(localStorage.getItem("profile"));
@@ -48,6 +49,9 @@ function App() {
                     </Route>
                     <Route path="/accounts/edit" exact>
                         {user ? <EditProfile /> : <Redirect to="/login" />}
+                    </Route>
+                    <Route path="/direct/:id" exact>
+                        {user ? <Direct /> : <Login />}
                     </Route>
                     <NotFound404 />
                 </Switch>

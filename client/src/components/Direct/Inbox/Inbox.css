@@ -1,0 +1,35 @@
+.inbox {
+    flex: 0.35;
+    border-top: 1px solid #dbdbdb;
+    display: flex;
+    flex-direction: column;
+}
+.inbox__header {
+    padding: 1rem 2rem;
+    border-bottom: 1px solid #dbdbdb;
+    display: flex;
+    min-height: 63px;
+}
+.inbox__username {
+    display: flex;
+    margin: 0rem 2rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: rgb(43, 43, 43) !important;
+    font-size: 0.95rem;
+}
+.inbox__new-message {
+    color: rgb(43, 43, 43) !important;
+    cursor: pointer;
+}
+.inbox__meassages {
+    height: 100%;
+    overflow: auto;
+}
+
+@media all and (min-width: 735px) {
+    .inbox {
+        border-right: 1px solid #dbdbdb;
+        border-top: none;
+    }
+}

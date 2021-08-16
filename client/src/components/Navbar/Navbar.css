@@ -119,20 +119,15 @@
     cursor: pointer;
 }
 .nav__avatar {
-    height: 30px;
-    width: 30px;
     border-radius: 50%;
     display: grid;
     place-items: center;
     padding: 2px;
     border: 1px solid rgb(20, 20, 20);
-    color: rgb(20, 20, 20);
-    font-weight: bold;
-    overflow: hidden;
 }
 .avatar__img {
-    width: 100%;
-    height: 100%;
+    height: 22px;
+    width: 22px;
     object-fit: cover;
     border-radius: 50%;
 }

@@ -33,7 +33,7 @@ function PostDetails() {
     const loggedUser = JSON.parse(localStorage.getItem("profile"));
     const { setCurrentId } = useGlobalContext();
     const [enteredComment, setEnteredComment] = useState("");
-    console.log("post  ", post);
+    // console.log("post  ", post);
 
     const submitComment = (e) => {
         e.preventDefault();
@@ -153,9 +153,11 @@ function PostDetails() {
                                 <DeleteOutlineIcon
                                     onClick={() =>
                                         dispatch(
-                                            post?._id,
-                                            post?.username,
-                                            history
+                                            deletePost(
+                                                post?._id,
+                                                post?.username,
+                                                history
+                                            )
                                         )
                                     }
                                 />
@@ -180,6 +182,7 @@ function PostDetails() {
                     </div>
                 </div>
 
+                {/* SideBar */}
                 <aside className="post-details__info">
                     <header className="post-details__header--lg">
                         <div className="post-details__profile">
@@ -216,9 +219,11 @@ function PostDetails() {
                                     <DeleteOutlineIcon
                                         onClick={() =>
                                             dispatch(
-                                                post?._id,
-                                                post?.username,
-                                                history
+                                                deletePost(
+                                                    post?._id,
+                                                    post?.username,
+                                                    history
+                                                )
                                             )
                                         }
                                     />
@@ -271,6 +276,7 @@ function PostDetails() {
                             </div>
                         </div>
 
+                        {/* Comments */}
                         <div className="post-details__comments">
                             {post?.comments?.map((comment) => (
                                 <Comment comment={comment} key={comment._id} />
