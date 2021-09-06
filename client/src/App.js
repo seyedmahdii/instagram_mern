@@ -21,6 +21,12 @@ function App() {
             <BrowserRouter>
                 <Navbar />
                 <Switch>
+                    <Route path="/" exact>
+                        {/* Followings' recent posts */}
+                        <Redirect
+                            to={user ? `/${user?.result?.username}` : `/login`}
+                        />
+                    </Route>
                     <Route path="/post/create" exact>
                         {user ? <Form /> : <Redirect to="/login" />}
                     </Route>

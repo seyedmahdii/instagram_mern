@@ -125,8 +125,8 @@ function PostDetails() {
                         <a href={`/${post?.username}`}>
                             <img
                                 src={
-                                    loggedUser
-                                        ? loggedUser?.result?.image
+                                    post?.userProfile
+                                        ? post?.userProfile
                                         : defaultProfile
                                 }
                                 alt="Profile"
@@ -189,8 +189,8 @@ function PostDetails() {
                             <a href={`/${post?.username}`}>
                                 <img
                                     src={
-                                        loggedUser
-                                            ? loggedUser?.result?.image
+                                        post?.userProfile
+                                            ? post?.userProfile
                                             : defaultProfile
                                     }
                                     alt="Profile"
@@ -245,8 +245,8 @@ function PostDetails() {
                             <a href={`/${post?.username}`}>
                                 <img
                                     src={
-                                        loggedUser
-                                            ? loggedUser?.result?.image
+                                        post?.userProfile
+                                            ? post?.userProfile
                                             : defaultProfile
                                     }
                                     alt="Profile"

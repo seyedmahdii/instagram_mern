@@ -63,9 +63,9 @@ function Navbar() {
         <div className="navbar">
             <div className="container">
                 <nav className="nav">
-                    <div className="nav__logo">
+                    <div>
                         <a href="/">
-                            <img src={Logo} alt="Logo" />
+                            <img src={Logo} alt="Logo" className="nav__logo" />
                         </a>
                     </div>
 
@@ -135,7 +135,10 @@ function Navbar() {
 
                     {user ? (
                         <div className="nav__buttons">
-                            <HomeOutlinedIcon className="nav__icon logout" />
+                            <HomeOutlinedIcon
+                                className="nav__icon logout"
+                                onClick={() => history.push("/")}
+                            />
                             <FavoriteBorderOutlinedIcon className="nav__icon logout" />
                             <ExploreOutlinedIcon className="nav__icon logout" />
                             <ExitToAppIcon

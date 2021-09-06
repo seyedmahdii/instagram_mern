@@ -31,15 +31,14 @@ function Form() {
         event.preventDefault();
 
         if (id) {
-            dispatch(
-                updatePost(
-                    { ...postData, username: user?.result?.username },
-                    id
-                )
-            );
+            dispatch(updatePost(postData, id));
         } else {
             dispatch(
-                createPost({ ...postData, username: user?.result?.username })
+                createPost({
+                    ...postData,
+                    username: user?.result?.username,
+                    userProfile: user?.result?.image,
+                })
             );
         }
 

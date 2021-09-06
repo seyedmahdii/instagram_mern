@@ -9,7 +9,7 @@ export const register = (formData, history) => async (dispatch) => {
     try {
         const { data } = await api.register(formData);
         dispatch({ type: AUTH, data });
-        history.push("/");
+        history.push(`/${data?.result?.username}`);
     } catch (error) {
         dispatch({
             type: AUTH_ERROR,
@@ -23,7 +23,7 @@ export const login = (formData, history) => async (dispatch) => {
         const { data } = await api.login(formData);
         dispatch({ type: AUTH, data });
 
-        history.push("/");
+        history.push(`/${data?.result?.username}`);
     } catch (error) {
         dispatch({
             type: AUTH_ERROR,

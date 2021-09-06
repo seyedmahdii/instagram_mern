@@ -10,12 +10,16 @@
     padding: 0.6rem 0;
 }
 
+.nav__logo {
+    width: 4.5rem;
+}
+
 .nav__search {
     position: relative;
 }
 .nav__input-wrapper {
     min-width: 125px;
-    width: 222px;
+    width: 160px;
     background-color: #fafafa;
     border: 1px solid #e7e7e7;
     border-radius: 3px;
@@ -28,6 +32,7 @@
     border: none;
     outline-width: 0;
     color: #7c7c7c;
+    width: 100%;
 }
 .nav__search-icon {
     margin-right: 6px;
@@ -53,6 +58,7 @@
     margin: 1rem;
     border-radius: 4px;
     display: none;
+    overflow: auto;
 }
 .nav__search-result::before {
     content: "";
@@ -111,11 +117,11 @@
     align-items: center;
 }
 .nav__buttons > * {
-    margin-left: 0.8rem;
+    margin-left: 0.25rem;
 }
 .nav__icon {
     color: rgb(20, 20, 20);
-    font-size: 1.65rem !important;
+    font-size: 1.35rem !important;
     cursor: pointer;
 }
 .nav__avatar {
@@ -126,8 +132,29 @@
     border: 1px solid rgb(20, 20, 20);
 }
 .avatar__img {
-    height: 22px;
-    width: 22px;
+    height: 17px;
+    width: 17px;
     object-fit: cover;
     border-radius: 50%;
+}
+
+@media all and (min-width: 600px) {
+    .nav__logo {
+        width: auto;
+    }
+
+    .nav__input-wrapper {
+        width: 222px;
+    }
+
+    .nav__buttons > * {
+        margin-left: 0.8rem;
+    }
+    .nav__icon {
+        font-size: 1.65rem !important;
+    }
+    .avatar__img {
+        height: 22px;
+        width: 22px;
+    }
 }

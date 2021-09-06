@@ -7,7 +7,7 @@ export const getPosts = async (req, res) => {
     try {
         const posts = await Post.find({
             username: username,
-        });
+        }).sort({ createdAt: -1 });
 
         res.status(200).json(posts);
     } catch (error) {

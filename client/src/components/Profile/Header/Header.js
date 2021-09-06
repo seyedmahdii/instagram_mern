@@ -59,6 +59,16 @@ function Header() {
                                 <SettingsIcon className="header__settings-btn" />
                             </div>
                         )}
+                        {loggedUser?.result?.username === user?.username && (
+                            <div className="header__btn-container">
+                                <a
+                                    href="/post/create"
+                                    className="btn btn-bordered btn-bordered-default"
+                                >
+                                    New Post
+                                </a>
+                            </div>
+                        )}
                         {loggedUser &&
                             loggedUser?.result?.username !== user?.username && (
                                 <>

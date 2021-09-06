@@ -10,7 +10,7 @@ function Posts() {
     const { isLoading } = useSelector((state) => state.posts);
     const { setPostsCount } = useGlobalContext();
     setPostsCount(posts.length);
-    console.log(posts);
+    // console.log(posts);
 
     if (posts.length && !isLoading === 0) {
         return (
