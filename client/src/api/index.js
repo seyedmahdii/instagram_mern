@@ -1,12 +1,12 @@
 import axios from "axios";
 
 // Local
-const API = axios.create({ baseURL: "http://localhost:8000" });
+// const API = axios.create({ baseURL: "http://localhost:8000" });
 
 // Deployed
-// const API = axios.create({
-//     baseURL: "https://instagram-mern-project.herokuapp.com",
-// });
+const API = axios.create({
+    baseURL: "https://instagram-mern-project.herokuapp.com",
+});
 
 // Sending the token to the backend -> so that backend middleware verifys the user is logged in
 API.interceptors.request.use((req) => {
